@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harshgamer113 — Tactical Cyber Arena</title>
+  <meta name="theme-color" content="#0B0D13" />
+  <meta name="description" content="HARSHGAMER113 SQUAD 113 HUB - sensitivity codes, scrims, videos and squad chat." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8E%AE%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0B0D13;
+      --surface: #131722;
+      --elevated: #1B2131;
+      --border: #283148;
+      --cyan: #00E5FF;
+      --cyan-dark: #003B47;
+      --on-cyan: #001F26;
+      --red: #FF3D5A;
+      --red-dark: #4A101D;
+      --lime: #B6FF3B;
+      --gold: #FFB800;
+      --text: #F3F6FC;
+      --muted: #9BA7BF;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+    button, input, textarea, select { font-family: inherit; color: inherit; }
+    button { cursor: pointer; border: none; background: none; }
+    a { color: inherit; text-decoration: none; }
+
+    /* Layout Shell */
+    .app-shell { display: flex; min-height: 100vh; width: 100%; }
+    .nav-rail {
+      display: none;
+      width: 92px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 40;
+      padding: 16px 8px;
+    }
+    .bottom-nav {
+      display: flex;
+      position: fixed;
+      inset: auto 0 0 0;
+      height: 68px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      z-index: 40;
+      justify-content: space-around;
+      align-items: center;
+      padding: 4px 6px;
+    }
+    .nav-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      min-width: 56px;
+      min-height: 48px;
+      padding: 6px 10px;
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 600;
+      transition: 0.18s ease;
+    }
+    .nav-btn.active { background: var(--cyan-dark); color: var(--cyan); }
+    .nav-btn svg { width: 20px; height: 20px; }
+
+    .main-area {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 84px;
+    }
+    .container {
+      width: 100%;
+      max-width: 840px;
+      padding: 16px;
+    }
+
+    @media (min-width: 720px) {
+      .nav-rail { display: flex; }
+      .bottom-nav { display: none; }
+      .main-area { padding-left: 92px; padding-bottom: 28px; }
+    }
+
+    /* Typography & Badges */
+    .display { font-family: var(--font-display); letter-spacing: 0.04em; text-transform: uppercase; }
+    .mono { font-family: var(--font-mono); }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid currentColor;
+      background: rgba(255,255,255,0.04);
+    }
+    .badge-cyan { color: var(--cyan); background: rgba(0,229,255,0.1); }
+    .badge-red { color: var(--red); background: rgba(255,61,90,0.12); }
+    .badge-lime { color: var(--lime); background: rgba(182,255,59,0.1); }
+    .badge-gold { color: var(--gold); background: rgba(255,184,0,0.12); }
+
+    /* Cards & Controls */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .card-elevated { background: var(--elevated); border-color: var(--border); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: transform 0.1s ease, opacity 0.18s ease;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--cyan); color: var(--on-cyan); }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-outline { border: 1px solid var(--border); color: var(--text); background: transparent; }
+    .btn-outline-cyan { border: 1px solid rgba(0,229,255,0.55); color: var(--cyan); }
+    .btn-sm { min-height: 36px; padding: 0 12px; font-size: 12px; border-radius: 10px; }
+    .btn-full { width: 100%; }
+
+    .input, .textarea, .select {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 14px;
+      color: var(--text);
+      outline: none;
+    }
+    .input:focus, .textarea:focus, .select:focus { border-color: var(--cyan); }
+    .label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+
+    /* Segmented & Chips */
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    .seg-btn {
+      min-height: 40px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .seg-btn.active { background: var(--cyan-dark); color: var(--cyan); }
+
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+    .chip {
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .chip.active { border-color: var(--cyan); background: var(--cyan-dark); color: var(--cyan); }
+
+    /* Hero & Grids */
+    .hero-banner {
+      position: relative;
+      height: 175px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 80% 25%, rgba(255,61,90,0.38), transparent 52%),
+        radial-gradient(circle at 20% 20%, rgba(0,229,255,0.32), transparent 55%),
+        linear-gradient(135deg, #101829 0%, #0B0D13 100%);
+      border: 1px solid var(--border);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hero-grid-lines {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(0,229,255,0.06) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0,229,255,0.06) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+    .avatar-ring {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--cyan), var(--red));
+      padding: 3px; flex-shrink: 0;
+    }
+    .avatar-inner {
+      width: 100%; height: 100%; border-radius: 50%;
+      background: var(--surface);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 22px; color: var(--cyan);
+    }
+
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+    .stack { display: flex; flex-direction: column; gap: 12px; }
+    .row-between { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+    .row { display: flex; align-items: center; gap: 10px; }
+
+    .stat-tile { text-align: center; padding: 14px 10px; }
+    .stat-val { font-family: var(--font-display); font-size: 22px; font-weight: 700; margin-top: 4px; }
+    .stat-lbl { font-size: 11px; color: var(--muted); font-weight: 700; letter-spacing: 0.05em; }
+
+    .code-box {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      background: var(--bg); border: 1px dashed var(--border);
+      border-radius: 12px; padding: 10px 12px; margin-top: 8px;
+    }
+
+    /* Chat */
+    .chat-list {
+      display: flex; flex-direction: column; gap: 10px;
+      max-height: 430px; overflow-y: auto; padding-right: 4px;
+    }
+    .msg-bubble {
+      max-width: 86%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .msg-bubble.me {
+      align-self: flex-end;
+      background: rgba(0,229,255,0.1);
+      border-color: rgba(0,229,255,0.45);
+    }
+
+    /* Auth Screen */
+    .auth-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(0,229,255,0.15), transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(255,61,90,0.18), transparent 45%),
+        var(--bg);
+    }
+    .auth-card { width: 100%; max-width: 420px; }
+
+    /* Modal & Snackbar */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(5,7,11,0.78);
+      display: none; align-items: center; justify-content: center;
+      padding: 16px; z-index: 60;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-box { width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto; }
+
+    .toast {
+      position: fixed; bottom: 82px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--elevated); border: 1px solid var(--cyan); color: var(--text);
+      padding: 10px 18px; border-radius: 999px; font-size: 13px; font-weight: 600;
+      opacity: 0; pointer-events: none; transition: 0.22s ease; z-index: 80;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    @media (min-width: 720px) { .toast { bottom: 26px; } }
+
+    .hidden { display: none !important; }
+    .muted { color: var(--muted); font-size: 13px; }
+    .divider { height: 1px; background: var(--border); margin: 8px 0; }
+  </style>
+</head>
+<body>
+
+  <!-- AUTH VIEW -->
+  <section id="authView" class="auth-wrap hidden">
+    <div class="card auth-card stack">
+      <div class="row-between">
+        <span class="badge badge-red">HARSHGAMER113</span>
+        <span class="badge badge-cyan">SQUAD 113 HUB</span>
+      </div>
+      <div>
+        <h1 id="authTitle" class="display" style="font-size:26px;">Welcome Back</h1>
+        <p id="authSubtitle" class="muted">Sign in to access loadouts, scrims, videos & squad chat.</p>
+      </div>
+
+      <form id="authForm" class="stack">
+        <div id="signupNameGroup" class="hidden">
+          <label class="label" for="authName">Gamer Tag / Display Name</label>
+          <input id="authName" class="input" type="text" placeholder="e.g. Squad113_Striker" />
+        </div>
+        <div>
+          <label class="label" for="authEmail">Email</label>
+          <input id="authEmail" class="input" type="email" required placeholder="squad113@harshgamer.app" />
+        </div>
+        <div id="passwordGroup">
+          <label class="label" for="authPassword">Password</label>
+          <input id="authPassword" class="input" type="password" placeholder="Enter password" />
+        </div>
+        <div id="authError" class="badge badge-red hidden" style="border-radius:10px;padding:8px 12px;text-transform:none;"></div>
+        <button id="authSubmitBtn" type="submit" class="btn btn-primary btn-full">Login</button>
+      </form>
+
+      <button id="demoLoginBtn" type="button" class="btn btn-outline-cyan btn-full">Quick Demo Login (Squad113)</button>
+
+      <div class="row-between">
+        <button id="toggleSignupBtn" type="button" class="muted" style="font-weight:600;color:var(--cyan);">Create Account</button>
+        <button id="toggleForgotBtn" type="button" class="muted" style="font-weight:600;">Forgot Password?</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN APP SHELL -->
+  <div id="appShell" class="app-shell hidden">
+    <aside class="nav-rail" id="navRail"></aside>
+    <main class="main-area">
+      <div id="mainContent" class="container"></div>
+    </main>
+    <nav class="bottom-nav" id="bottomNav"></nav>
+  </div>
+
+  <!-- MODAL -->
+  <div id="modalBackdrop" class="modal-backdrop">
+    <div id="modalBox" class="card modal-box stack"></div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast"></div>
+
+  <script>
+    const STORAGE_KEY = 'harshgamer113_web_v1';
+    const YT_URL = 'https://youtube.com/@harshgamer-113';
+    const CREATOR_UID = 'HG113-IND-7749';
+
+    function uid() {
+      return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function defaultState() {
+      return {
+        currentUser: null,
+        accounts: [
+          { email: 'squad113@harshgamer.app', name: 'Squad113_Striker', password: 'gamer113' }
+        ],
+        profile: {
+          gamerTag: 'Squad113_Striker',
+          mainGame: 'BGMI',
+          role: 'Assaulter',
+          deviceName: '120FPS Pro OLED',
+          targetKd: '5.0 K/D',
+          bio: 'Grinding custom scrims with Harshgamer113 community.'
+        },
+        loadouts: [
+          { id: 'l1', title: 'HG113 Laser M416 Spray', game: 'BGMI', code: '7381-9940-1132-8854', cam: 118, ads: 104, gyro: 335, claw: '4-Finger + Full Gyro', notes: 'Zero vertical kick up to 150m with 3x/4x red-dot swap.', fav: true },
+          { id: 'l2', title: 'One-Tap Desert Eagle', game: 'Free Fire', code: 'FF113-HEAD-9940-PRO', cam: 192, ads: 178, gyro: 0, claw: '3-Finger Drag Shot', notes: 'High general drag for crisp close-range headlocks.', fav: true },
+          { id: 'l3', title: 'Ranked Rush SMG Kinetic', game: 'CODM', code: 'CODM-HG113-7741-SLIDE', cam: 145, ads: 128, gyro: 260, claw: '4-Finger Claw', notes: 'Tuned for slide-cancel flicks and tight hipfire tracking.', fav: false },
+          { id: 'l4', title: 'Radiant Micro-Flick 1600', game: 'Valorant', code: 'VAL-0;P;c;5;h;0;0l;4;0o;1', cam: 38, ads: 95, gyro: 0, claw: '0.24 Sens • 1600 DPI', notes: 'Cyan 1-4-2-0 static crosshair with crisp head-level micro-control.', fav: false }
+        ],
+        scrims: [
+          { id: 's1', title: 'Harshgamer113 Night Clash', game: 'BGMI', mode: 'Squad TPP', map: 'Erangel', schedule: 'Tonight • 9:00 PM IST', prize: 'MVP Crown + Showcase', maxSlots: 25, filledSlots: 19, registered: false, ign: '', squad: '', role: '' },
+          { id: 's2', title: '113 Lone Wolf Headshot Cup', game: 'Free Fire', mode: 'Clash Squad 4v4', map: 'Bermuda', schedule: 'Tomorrow • 7:30 PM IST', prize: 'Squad Spotlight', maxSlots: 16, filledSlots: 11, registered: false, ign: '', squad: '', role: '' },
+          { id: 's3', title: 'Cyber Arena SnD Gauntlet', game: 'CODM', mode: '5v5 Search & Destroy', map: 'Standoff', schedule: 'Saturday • 8:00 PM IST', prize: 'Top Fragger Badge', maxSlots: 12, filledSlots: 8, registered: false, ign: '', squad: '', role: '' }
+        ],
+        matchLogs: [
+          { id: 'm1', game: 'BGMI', mode: 'Squad Classic', map: 'Erangel', kills: 14, placement: 1, damage: 2180, notes: 'Clutched final 1v3 at Pochinki ridge with 4x M416.' },
+          { id: 'm2', game: 'BGMI', mode: 'TDM Warehouse', map: 'Warehouse', kills: 21, placement: 1, damage: 2850, notes: 'Warmup drill using 335 gyro sensitivity.' },
+          { id: 'm3', game: 'Free Fire', mode: 'CS Ranked', map: 'Purgatory', kills: 9, placement: 2, damage: 3420, notes: 'Double Desert Eagle opening picks on round 4.' }
+        ],
+        videos: [
+          { id: 'v1', title: '1v4 Final Zone Clutch + Zero Recoil 4-Finger Gyro Code', category: 'Montages', duration: '12:48', views: 48000, url: YT_URL, thumb: '', desc: 'Full Erangel ranked breakdown with live hand-cam and updated 335% red-dot gyro sensitivity.', saved: true },
+          { id: 'v2', title: 'BGMI & Free Fire Sensitivity Masterclass (120 FPS Settings)', category: 'Sensitivity Guides', duration: '15:20', views: 72000, url: YT_URL, thumb: '', desc: 'Step-by-step ADS, camera, and gyroscope tuning for close-range hipfire and mid-range sprays.', saved: false },
+          { id: 'v3', title: 'Harshgamer113 Night Clash Custom Rooms — Live Highlights', category: 'Live Streams', duration: '44:15', views: 31000, url: YT_URL, thumb: '', desc: 'Community squad rotations, Pochinki hot-drops, and final circle callouts.', saved: false },
+          { id: 'v4', title: 'Top 5 TDM Drills to Win Every 1v1 Duel', category: 'Sensitivity Guides', duration: '09:35', views: 64000, url: YT_URL, thumb: '', desc: 'Daily 10-minute crosshair placement, crouch-jiggle, and peek timing warmup routine.', saved: false }
+        ],
+        chats: [
+          { id: 'c1', room: 'global', senderId: 'hg113', senderName: 'Harshgamer113', role: 'CREATOR', text: 'Welcome to Squad 113 Global Lounge! Drop your IGN or grab the latest M416 gyro code from Home.', me: false, ts: Date.now() - 600000 },
+          { id: 'c2', room: 'global', senderId: 'aarav', senderName: 'Aarav_IGL', role: 'SQUAD LEAD', text: "Need 1 Assaulter for tonight's 9 PM Erangel Night Clash scrim. Who's ready?", me: false, ts: Date.now() - 300000 },
+          { id: 'c3', room: 'scrims', senderId: 'rohan', senderName: 'RohanClutch', role: 'SNIPER', text: 'Room ID opens 15 minutes before start. Check Scrims tab to lock your slot!', me: false, ts: Date.now() - 180000 },
+          { id: 'c4', room: 'bgmi', senderId: 'hg113', senderName: 'Harshgamer113', role: 'CREATOR', text: 'New 335% Red Dot Gyro spray code is live under Home -> Loadouts!', me: false, ts: Date.now() - 120000 },
+          { id: 'c5', room: 'freefire', senderId: 'vikram', senderName: 'Vikram_FF', role: 'RUSHER', text: 'Anyone running Clash Squad custom tonight? Using the Desert Eagle preset.', me: false, ts: Date.now() - 90000 }
+        ],
+        blockedUsers: [],
+        reports: [],
+        aiLogs: [],
+        squadNotes: [
+          { id: 'n1', title: 'Erangel Hot-Drop Split', category: 'Drop Spot', content: 'Pochinki East church compound: IGL takes roof for mid-street info while entry clears lower garage.', pinned: true },
+          { id: 'n2', title: 'Gyro Recoil Warmup (10 min)', category: 'Recoil Tip', content: 'Practice 60m moving targets in training grounds with no compensator before ranked queue.', pinned: false },
+          { id: 'n3', title: 'Season Goal: Conqueror Push', category: 'Goal', content: 'Maintain 4.5+ K/D across 40 squad matches with consistent top-5 rotations.', pinned: false }
+        ],
+        helpQuestions: []
+      };
+    }
+
+    let state = loadState();
+    let ui = {
+      authMode: 'login',
+      tab: 0,
+      homeSection: 0,
+      gameFilter: 'All',
+      favOnly: false,
+      scrimSection: 0,
+      videoFilter: 'All',
+      isAdmin: false,
+      chatRoom: 'global',
+      aiCat: 'Video Titles',
+      profileSub: 'main',
+      noteCat: 'All'
+    };
+
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? Object.assign(defaultState(), JSON.parse(raw)) : defaultState();
+      } catch {
+        return defaultState();
+      }
+    }
+
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    let toastTimer;
+    function showToast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 2600);
+    }
+
+    async function copyText(text, msg) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast(msg || 'Copied to clipboard');
+        return;
+      } catch { /* fall through to legacy copy */ }
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed;opacity:0;pointer-events:none;';
+      document.body.appendChild(ta);
+      ta.select();
+      let copied = false;
+      try { copied = document.execCommand('copy'); } catch { copied = false; }
+      ta.remove();
+      showToast(copied ? (msg || 'Copied to clipboard') : 'Copy blocked by browser. Select the text and copy manually.');
+    }
+
+    function formatViews(n) {
+      if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M views';
+      if (n >= 1000) return Math.round(n / 1000) + 'K views';
+      return n + ' views';
+    }
+
+    /* ---------------- SECURE PASSWORD HELPERS ---------------- */
+    function toHex(buffer) {
+      return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    function newSalt() {
+      const bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      return toHex(bytes);
+    }
+    async function hashPassword(password, salt) {
+      const data = new TextEncoder().encode(salt + ':' + password);
+      return toHex(await crypto.subtle.digest('SHA-256', data));
+    }
+    function cryptoAvailable() {
+      return Boolean(window.crypto && window.crypto.subtle);
+    }
+    // One-time migration: turns any plain-text password into a salted hash.
+    async function migrateAccounts() {
+      if (!cryptoAvailable()) return;
+      let changed = false;
+      for (const acc of state.accounts) {
+        if (typeof acc.password === 'string') {
+          acc.salt = newSalt();
+          acc.hash = await hashPassword(acc.password, acc.salt);
+          delete acc.password;
+          changed = true;
+        }
+      }
+      if (changed) saveState();
+    }
+
+    /* ---------------- AUTH ---------------- */
+    const authView = document.getElementById('authView');
+    const appShell = document.getElementById('appShell');
+
+    function renderAuth() {
+      const mode = ui.authMode;
+      document.getElementById('authError').classList.add('hidden');
+      document.getElementById('signupNameGroup').classList.toggle('hidden', mode !== 'signup');
+      document.getElementById('passwordGroup').classList.toggle('hidden', mode === 'forgot');
+      document.getElementById('authTitle').textContent =
+        mode === 'login' ? 'Welcome Back' : mode === 'signup' ? 'Join Squad 113' : 'Reset Password';
+      document.getElementById('authSubtitle').textContent =
+        mode === 'login'
+          ? 'Sign in to access loadouts, scrims, videos & squad chat.'
+          : mode === 'signup'
+          ? 'Create your local Squad 113 profile.'
+          : 'Verify your registered email to reset your password.';
+      document.getElementById('authSubmitBtn').textContent =
+        mode === 'login' ? 'Login' : mode === 'signup' ? 'Create Account' : 'Reset Password';
+      document.getElementById('toggleSignupBtn').textContent =
+        mode === 'login' ? 'Create Account' : 'Back to Login';
+    }
+
+    document.getElementById('toggleSignupBtn').onclick = () => {
+      ui.authMode = ui.authMode === 'login' ? 'signup' : 'login';
+      renderAuth();
+    };
+    document.getElementById('toggleForgotBtn').onclick = () => {
+      ui.authMode = ui.authMode === 'forgot' ? 'login' : 'forgot';
+      renderAuth();
+    };
+    document.getElementById('demoLoginBtn').onclick = () => {
+      state.currentUser = { email: 'squad113@harshgamer.app', name: 'Squad113_Striker' };
+      saveState();
+      renderRoot();
+      showToast('Signed in as Squad113_Striker');
+    };
+
+    document.getElementById('authForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('authEmail').value.trim().toLowerCase();
+      const pass = document.getElementById('authPassword').value;
+      const name = document.getElementById('authName').value.trim();
+      const errEl = document.getElementById('authError');
+      const showError = (msg) => {
+        errEl.textContent = msg;
+        errEl.classList.remove('hidden');
+      };
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return showError('Please enter a valid email address.');
+      }
+      if (ui.authMode === 'forgot') {
+        return showError('Password reset emails need the Firebase backend (see README). Contact the admin for this offline build.');
+      }
+      if (!cryptoAvailable()) {
+        return showError('Secure login needs https:// or localhost. Open the site over HTTPS.');
+      }
+
+      if (ui.authMode === 'login') {
+        if (!pass) return showError('Please enter your password.');
+        const acc = state.accounts.find(a => a.email === email);
+        const ok = acc && acc.hash && (await hashPassword(pass, acc.salt)) === acc.hash;
+        if (!ok) return showError('Invalid email or password. Try Quick Demo Login!');
+        state.currentUser = { email: acc.email, name: acc.name };
+        saveState();
+        renderRoot();
+        return;
+      }
+
+      // Signup
+      if (!name || name.length > 30) return showError('Enter a gamer tag (1-30 characters).');
+      if (pass.length < 8 || !/[A-Za-z]/.test(pass) || !/\d/.test(pass)) {
+        return showError('Password needs 8+ characters with letters and numbers.');
+      }
+      if (state.accounts.some(a => a.email === email)) {
+        return showError('Account already exists with this email.');
+      }
+      const salt = newSalt();
+      state.accounts.push({ email, name, salt, hash: await hashPassword(pass, salt) });
+      state.currentUser = { email, name };
+      state.profile.gamerTag = name;
+      saveState();
+      renderRoot();
+      showToast('Account created!');
+    };
+
+    /* ---------------- NAV ---------------- */
+    const NAV_ITEMS = [
+      { label: 'Home', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>' },
+      { label: 'Videos', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>' },
+      { label: 'Chats', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>' },
+      { label: 'AI Studio', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>' },
+      { label: 'Profile', icon: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>' }
+    ];
+
+    function renderNav() {
+      const html = NAV_ITEMS.map((item, idx) => `
+        <button class="nav-btn ${ui.tab === idx ? 'active' : ''}" onclick="switchTab(${idx})">
+          ${item.icon}
+          <span>${item.label}</span>
+        </button>
+      `).join('');
+      document.getElementById('navRail').innerHTML = html;
+      document.getElementById('bottomNav').innerHTML = html;
+    }
+
+    window.switchTab = (idx) => {
+      ui.tab = idx;
+      if (idx !== 4) ui.profileSub = 'main';
+      renderNav();
+      renderMain();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    /* ---------------- HOME TAB ---------------- */
+    function careerStats() {
+      const logs = state.matchLogs;
+      if (!logs.length) return { avgKills: '0.0', winRate: 0 };
+      const kills = logs.reduce((s, m) => s + Number(m.kills || 0), 0);
+      const wins = logs.filter(m => Number(m.placement) === 1).length;
+      return {
+        avgKills: (kills / logs.length).toFixed(1),
+        winRate: Math.round((wins / logs.length) * 100)
+      };
+    }
+
+    function renderHome() {
+      const seg = `
+        <div class="segmented">
+          ${['Arena', 'Loadouts', 'Scrims'].map((label, i) => `
+            <button class="seg-btn ${ui.homeSection === i ? 'active' : ''}" onclick="ui.homeSection=${i};renderMain();">${label}</button>
+          `).join('')}
+        </div>
+      `;
+      if (ui.homeSection === 0) return seg + renderArena();
+      if (ui.homeSection === 1) return seg + renderLoadouts();
+      return seg + renderScrims();
+    }
+
+    function renderArena() {
+      const stats = careerStats();
+      const joinedCount = state.scrims.filter(s => s.registered).length;
+      const welcomeName = state.currentUser?.name || state.profile.gamerTag;
+
+      return `
+        <div class="stack">
+          <div class="hero-banner">
+            <div class="hero-grid-lines"></div>
+            <div><span class="badge badge-lime">SEASON 11 • LIVE HUB</span></div>
+            <div class="row" style="position:relative;z-index:2;">
+              <div class="avatar-ring"><div class="avatar-inner">HG</div></div>
+              <div>
+                <div class="row" style="gap:6px;flex-wrap:wrap;">
+                  <h2 class="display" style="font-size:24px;color:var(--red);">HARSHGAMER113</h2>
+                  <span class="badge badge-cyan" style="padding:2px 8px;">VERIFIED</span>
+                </div>
+                <p style="font-size:14px;font-weight:600;">Welcome, ${escapeHtml(welcomeName)}</p>
+                <p class="muted" style="font-size:12px;">Pro Esports Creator • 4-Finger Gyro</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="${YT_URL}" target="_blank" rel="noopener" class="btn btn-red btn-full">▶ Visit YouTube Channel</a>
+          <a href="${YT_URL}?sub_confirmation=1" target="_blank" rel="noopener" class="btn btn-outline-cyan btn-full">Subscribe on YouTube</a>
+
+          <div class="card row-between">
+            <div>
+              <div class="muted" style="font-size:11px;font-weight:700;">CREATOR UID</div>
+              <div class="mono" style="font-size:16px;font-weight:700;color:var(--cyan);">${CREATOR_UID}</div>
+            </div>
+            <button class="btn btn-outline-cyan btn-sm" onclick="copyText('${CREATOR_UID}', 'Creator UID copied to clipboard')">Copy UID</button>
+          </div>
+
+          <div class="grid-3">
+            <div class="card stat-tile"><div class="stat-lbl">AVG KILLS</div><div class="stat-val" style="color:var(--cyan);">${stats.avgKills}</div></div>
+            <div class="card stat-tile"><div class="stat-lbl">WIN RATE</div><div class="stat-val" style="color:var(--lime);">${stats.winRate}%</div></div>
+            <div class="card stat-tile"><div class="stat-lbl">SCRIMS</div><div class="stat-val" style="color:var(--red);">${joinedCount}/${state.scrims.length}</div></div>
+          </div>
+
+          <div class="card stack" style="border-color:rgba(255,61,90,0.45);background:linear-gradient(135deg, rgba(255,61,90,0.1), var(--surface));">
+            <div><span class="badge badge-red">${state.scrims.length} OPEN LOBBIES • ${joinedCount} JOINED</span></div>
+            <div>
+              <h3 class="display" style="font-size:19px;">Night Clash Custom Rooms</h3>
+              <p class="muted">Lock your squad slot, log match K/D, and claim MVP spotlight.</p>
+            </div>
+            <button class="btn btn-red" onclick="ui.homeSection=2;renderMain();">Enter Tournament Hub</button>
+          </div>
+
+          <div class="row-between">
+            <div>
+              <h3 class="display" style="font-size:18px;">Pro Sensitivity Presets</h3>
+              <p class="muted">Tap copy to import sensitivity codes</p>
+            </div>
+            <button class="btn btn-outline btn-sm" onclick="ui.homeSection=1;renderMain();">View All</button>
+          </div>
+
+          <div class="grid-2">
+            ${state.loadouts.slice(0, 3).map(renderLoadoutCard).join('')}
+          </div>
+
+          <div class="card stack">
+            <h3 class="display" style="font-size:17px;">Harshgamer113 Battle Rig</h3>
+            <div class="grid-2" style="gap:10px;">
+              <div><div class="muted" style="font-size:11px;">CONTROL CLAW</div><strong>4-Finger + Peek Hold</strong></div>
+              <div><div class="muted" style="font-size:11px;">GYROSCOPE</div><strong>Always On • 335% Red Dot</strong></div>
+              <div><div class="muted" style="font-size:11px;">FRAME TARGET</div><strong>120 FPS Smooth / Extreme+</strong></div>
+              <div><div class="muted" style="font-size:11px;">AUDIO TUNING</div><strong>Ultra Stereo • Footstep EQ</strong></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderLoadoutCard(l) {
+      return `
+        <div class="card stack">
+          <div class="row-between">
+            <span class="badge badge-cyan">${escapeHtml(l.game)}</span>
+            <div class="row" style="gap:6px;">
+              <button class="btn btn-outline btn-sm" onclick="toggleFav('${l.id}')" title="Favorite">${l.fav ? '★' : '☆'}</button>
+              <button class="btn btn-outline btn-sm" onclick="deleteLoadout('${l.id}')" title="Delete" style="color:var(--red);">✕</button>
+            </div>
+          </div>
+          <div>
+            <h4 style="font-size:16px;">${escapeHtml(l.title)}</h4>
+            <p class="muted" style="font-size:12px;">${escapeHtml(l.claw)}</p>
+          </div>
+          <div class="grid-3" style="gap:6px;">
+            <div class="card-elevated" style="padding:8px;border-radius:10px;text-align:center;"><div class="muted" style="font-size:10px;">CAM</div><strong>${l.cam}%</strong></div>
+            <div class="card-elevated" style="padding:8px;border-radius:10px;text-align:center;"><div class="muted" style="font-size:10px;">ADS</div><strong>${l.ads}%</strong></div>
+            <div class="card-elevated" style="padding:8px;border-radius:10px;text-align:center;"><div class="muted" style="font-size:10px;">GYRO</div><strong>${l.gyro}%</strong></div>
+          </div>
+          <p class="muted" style="font-size:12px;">${escapeHtml(l.notes)}</p>
+          <div class="code-box">
+            <span class="mono" style="font-size:12px;color:var(--cyan);overflow:hidden;text-overflow:ellipsis;">${escapeHtml(l.code)}</span>
+            <button class="btn btn-primary btn-sm" onclick="copyLoadoutCode('${l.id}')">Copy</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderLoadouts() {
+      const games = ['All', 'BGMI', 'Free Fire', 'CODM', 'Valorant'];
+      const list = state.loadouts.filter(l =>
+        (ui.gameFilter === 'All' || l.game === ui.gameFilter) && (!ui.favOnly || l.fav)
+      );
+      return `
+        <div class="stack">
+          <div class="row-between">
+            <div>
+              <h2 class="display" style="font-size:22px;">Sensitivity & HUD Vault</h2>
+              <p class="muted">Tap any code to copy into your game settings</p>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="openNewLoadoutModal()">+ New Loadout</button>
+          </div>
+          <div class="chips">
+            ${games.map(g => `<button class="chip ${ui.gameFilter === g ? 'active' : ''}" onclick="ui.gameFilter='${g}';renderMain();">${g}</button>`).join('')}
+            <button class="chip ${ui.favOnly ? 'active' : ''}" onclick="ui.favOnly=!ui.favOnly;renderMain();">★ Favorites</button>
+          </div>
+          ${list.length ? `<div class="grid-2">${list.map(renderLoadoutCard).join('')}</div>` : `<div class="card"><p class="muted">No loadouts match this filter.</p></div>`}
+        </div>
+      `;
+    }
+
+    function renderScrims() {
+      return `
+        <div class="stack">
+          <div class="row-between">
+            <h2 class="display" style="font-size:22px;">Tournaments & Match Log</h2>
+            <button class="btn btn-primary btn-sm" onclick="openMatchModal()">+ Log Match</button>
+          </div>
+          <div class="chips">
+            <button class="chip ${ui.scrimSection === 0 ? 'active' : ''}" onclick="ui.scrimSection=0;renderMain();">Scrims & Cups</button>
+            <button class="chip ${ui.scrimSection === 1 ? 'active' : ''}" onclick="ui.scrimSection=1;renderMain();">Match Tracker (${state.matchLogs.length})</button>
+          </div>
+          ${ui.scrimSection === 0 ? state.scrims.map(s => `
+            <div class="card stack">
+              <div class="row-between">
+                <span class="badge badge-cyan">${escapeHtml(s.game)} • ${escapeHtml(s.map)}</span>
+                <span class="badge ${s.registered ? 'badge-lime' : 'badge-gold'}">${s.filledSlots}/${s.maxSlots} SLOTS</span>
+              </div>
+              <div>
+                <h3 style="font-size:17px;">${escapeHtml(s.title)}</h3>
+                <p class="muted">${escapeHtml(s.mode)} • ${escapeHtml(s.schedule)} • Prize: ${escapeHtml(s.prize)}</p>
+              </div>
+              ${s.registered ? `
+                <div class="card-elevated" style="padding:10px;border-radius:10px;">
+                  <div style="font-size:12px;color:var(--lime);font-weight:700;">LOCKED IN: ${escapeHtml(s.ign)} (${escapeHtml(s.squad)} • ${escapeHtml(s.role)})</div>
+                </div>
+                <button class="btn btn-outline btn-sm" onclick="leaveScrim('${s.id}')">Cancel Slot</button>
+              ` : `
+                <button class="btn btn-red btn-sm" onclick="openJoinScrimModal('${s.id}')">Join Scrim</button>
+              `}
+            </div>
+          `).join('') : state.matchLogs.map(m => `
+            <div class="card row-between">
+              <div>
+                <div class="row" style="gap:8px;">
+                  <span class="badge ${m.placement === 1 ? 'badge-lime' : 'badge-cyan'}">#${m.placement}</span>
+                  <strong>${escapeHtml(m.game)} • ${escapeHtml(m.map)}</strong>
+                </div>
+                <p class="muted" style="margin-top:4px;">${m.kills} Kills • ${m.damage} DMG • ${escapeHtml(m.notes)}</p>
+              </div>
+              <button class="btn btn-outline btn-sm" style="color:var(--red);" onclick="deleteMatch('${m.id}')">✕</button>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    /* ---------------- VIDEOS TAB ---------------- */
+    function isDirectVideo(url) {
+      return /\.(mp4|webm|mov)(\?|#|$)/i.test(url || '');
+    }
+    function videoPreview(v) {
+      if (v.thumb && !isDirectVideo(v.thumb)) {
+        return `<img src="${escapeHtml(v.thumb)}" alt="" loading="lazy" style="width:100%;height:150px;object-fit:cover;border-radius:12px;">`;
+      }
+      if (isDirectVideo(v.url)) {
+        return `<video src="${escapeHtml(v.url)}" controls preload="metadata" playsinline style="width:100%;max-height:200px;border-radius:12px;background:#000;"></video>`;
+      }
+      return `<div style="height:130px;border-radius:12px;background:linear-gradient(135deg,#192338,#0d111a);display:flex;align-items:center;justify-content:space-between;padding:14px;border:1px solid var(--border);">
+                    <span class="badge badge-red">${escapeHtml(v.category)}</span>
+                    <span class="mono badge badge-cyan">${escapeHtml(v.duration)}</span>
+                  </div>`;
+    }
+    function renderVideos() {
+      const cats = ['All', 'Montages', 'Sensitivity Guides', 'Live Streams', 'Saved'];
+      const list = state.videos.filter(v =>
+        ui.videoFilter === 'All' ? true : ui.videoFilter === 'Saved' ? v.saved : v.category === ui.videoFilter
+      );
+      return `
+        <div class="stack">
+          <div class="row-between">
+            <div>
+              <h2 class="display" style="font-size:22px;">Videos & Clips</h2>
+              <p class="muted">Harshgamer113 highlights & creator uploads</p>
+            </div>
+            <div class="row">
+              <button class="btn ${ui.isAdmin ? 'btn-red' : 'btn-outline'} btn-sm" onclick="ui.isAdmin=!ui.isAdmin;renderMain();">
+                ${ui.isAdmin ? 'Admin ON' : 'Creator Admin'}
+              </button>
+              ${ui.isAdmin ? `<button class="btn btn-primary btn-sm" onclick="openUploadVideoModal()">+ Upload</button>` : ''}
+            </div>
+          </div>
+          <div class="chips">
+            ${cats.map(c => `<button class="chip ${ui.videoFilter === c ? 'active' : ''}" onclick="ui.videoFilter='${c}';renderMain();">${c}</button>`).join('')}
+          </div>
+          <div class="grid-2">
+            ${list.map(v => `
+              <div class="card stack">
+                ${videoPreview(v)}
+                <div>
+                  <h4 style="font-size:15px;">${escapeHtml(v.title)}</h4>
+                  <p class="muted" style="font-size:12px;margin-top:4px;">${escapeHtml(v.desc)}</p>
+                </div>
+                <div class="row-between">
+                  <span class="muted" style="font-size:12px;">${formatViews(v.views)}</span>
+                  <div class="row" style="gap:6px;">
+                    <button class="btn btn-outline btn-sm" onclick="toggleSaveVideo('${v.id}')">${v.saved ? '★ Saved' : '☆ Save'}</button>
+                    <button class="btn btn-primary btn-sm" onclick="watchVideo('${v.id}')">Watch</button>
+                    ${ui.isAdmin ? `<button class="btn btn-outline btn-sm" style="color:var(--red);" onclick="deleteVideo('${v.id}')">✕</button>` : ''}
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    /* ---------------- CHATS TAB ---------------- */
+    function renderChats() {
+      const rooms = [
+        { id: 'global', label: 'Global Lounge' },
+        { id: 'scrims', label: 'Scrims' },
+        { id: 'bgmi', label: 'BGMI' },
+        { id: 'freefire', label: 'Free Fire' }
+      ];
+      const blockedIds = new Set(state.blockedUsers.map(b => b.id));
+      const msgs = state.chats.filter(c => c.room === ui.chatRoom && !blockedIds.has(c.senderId));
+
+      return `
+        <div class="stack">
+          <div class="row-between">
+            <div>
+              <h2 class="display" style="font-size:22px;">Squad 113 Chat</h2>
+              <p class="muted">Local room • Block & report moderation included</p>
+            </div>
+            ${state.blockedUsers.length ? `<button class="btn btn-outline btn-sm" onclick="openBlockedModal()">Blocked (${state.blockedUsers.length})</button>` : ''}
+          </div>
+          <div class="chips">
+            ${rooms.map(r => `<button class="chip ${ui.chatRoom === r.id ? 'active' : ''}" onclick="ui.chatRoom='${r.id}';renderMain();">${r.label}</button>`).join('')}
+          </div>
+          <div class="card stack">
+            <div class="chat-list" id="chatList">
+              ${msgs.length ? msgs.map(m => `
+                <div class="msg-bubble ${m.me ? 'me' : ''}">
+                  <div class="row-between" style="margin-bottom:4px;">
+                    <span style="font-size:12px;font-weight:700;color:${m.me ? 'var(--cyan)' : 'var(--red)'};">${escapeHtml(m.senderName)} <span class="muted">• ${escapeHtml(m.role)}</span></span>
+                    ${!m.me ? `
+                      <div class="row" style="gap:6px;">
+                        <button class="muted" style="font-size:11px;" onclick="reportMsg('${m.id}')">Report</button>
+                        <button class="muted" style="font-size:11px;color:var(--red);" onclick="blockUser('${escapeHtml(m.senderId)}')">Block</button>
+                      </div>
+                    ` : ''}
+                  </div>
+                  <div style="font-size:14px;">${escapeHtml(m.text)}</div>
+                </div>
+              `).join('') : '<p class="muted">No messages in this room yet.</p>'}
+            </div>
+            <form onsubmit="sendChat(event)" class="row">
+              <input id="chatInput" class="input" maxlength="1000" placeholder="Message #${ui.chatRoom}..." required />
+              <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    /* ---------------- AI STUDIO TAB ---------------- */
+    function renderAiStudio() {
+      const cats = ['Video Titles', 'Training Drill', 'Thumbnail Hook', 'Drop Strategy'];
+      const presets = [
+        '4-finger gyro M416 spray montage',
+        'Close range TDM hipfire drill',
+        'Erangel Pochinki squad drop plan'
+      ];
+      return `
+        <div class="stack">
+          <div>
+            <div class="row-between">
+              <h2 class="display" style="font-size:22px;">Harshgamer AI Studio</h2>
+              <span class="badge badge-gold">DEMO SAMPLE MODE</span>
+            </div>
+            <p class="muted">Local creator ideation templates (attach Gemini backend for live inference).</p>
+          </div>
+          <div class="chips">
+            ${cats.map(c => `<button class="chip ${ui.aiCat === c ? 'active' : ''}" onclick="ui.aiCat='${c}';renderMain();">${c}</button>`).join('')}
+          </div>
+          <div class="card stack">
+            <div class="chips" style="margin-bottom:0;">
+              ${presets.map(p => `<button type="button" class="chip" onclick="document.getElementById('aiPrompt').value='${p}'">${p}</button>`).join('')}
+            </div>
+            <textarea id="aiPrompt" class="textarea" rows="3" placeholder="Describe your video, drill, or strategy topic..."></textarea>
+            <button class="btn btn-primary" onclick="generateAi()">Generate Ideas</button>
+          </div>
+          ${state.aiLogs.map(log => `
+            <div class="card stack">
+              <div class="row-between">
+                <span class="badge badge-cyan">${escapeHtml(log.category)}</span>
+                <div class="row" style="gap:6px;">
+                  <button class="btn btn-outline btn-sm" onclick="copyAiLog('${log.id}')">Copy</button>
+                  <button class="btn btn-outline btn-sm" style="color:var(--red);" onclick="deleteAiLog('${log.id}')">✕</button>
+                </div>
+              </div>
+              <div style="font-weight:700;font-size:13px;">Prompt: ${escapeHtml(log.prompt)}</div>
+              <pre style="white-space:pre-wrap;font-family:inherit;font-size:13px;color:var(--muted);line-height:1.5;">${escapeHtml(log.response)}</pre>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    /* ---------------- PROFILE TAB ---------------- */
+    function renderProfile() {
+      if (ui.profileSub === 'squad') return renderSquadHq();
+      if (ui.profileSub === 'help') return renderHelpCenter();
+      const user = state.currentUser;
+      return `
+        <div class="stack">
+          <div class="card stack" style="text-align:center;align-items:center;">
+            <span class="badge badge-cyan">SQUAD 113 ACCOUNT</span>
+            <h2 class="display" style="font-size:26px;">${escapeHtml(user?.name || state.profile.gamerTag)}</h2>
+            <p class="muted">${escapeHtml(user?.email || 'squad113@harshgamer.app')}</p>
+            <span class="badge badge-lime">Saved Locally in Browser</span>
+          </div>
+          <button class="btn btn-primary btn-full" onclick="ui.profileSub='squad';renderMain();">Squad HQ & Strategy Notes</button>
+          <button class="btn btn-outline btn-full" onclick="ui.profileSub='help';renderMain();">Help Center & Support</button>
+          <button class="btn btn-red btn-full" onclick="logoutUser()">Logout</button>
+        </div>
+      `;
+    }
+
+    function renderSquadHq() {
+      const p = state.profile;
+      const cats = ['All', 'Drop Spot', 'Recoil Tip', 'Goal'];
+      const notes = state.squadNotes.filter(n => ui.noteCat === 'All' || n.category === ui.noteCat)
+        .sort((a, b) => Number(b.pinned) - Number(a.pinned));
+      return `
+        <div class="stack">
+          <button class="btn btn-outline btn-sm" style="align-self:flex-start;" onclick="ui.profileSub='main';renderMain();">← Back to Profile</button>
+          <div class="card stack">
+            <div class="row-between">
+              <div>
+                <h3 class="display" style="font-size:20px;">${escapeHtml(p.gamerTag)}</h3>
+                <p class="muted">${escapeHtml(p.mainGame)} • ${escapeHtml(p.role)} • ${escapeHtml(p.deviceName)} • Target ${escapeHtml(p.targetKd)}</p>
+              </div>
+              <button class="btn btn-outline-cyan btn-sm" onclick="openEditProfileModal()">Edit Profile</button>
+            </div>
+            <p style="font-size:13px;">${escapeHtml(p.bio)}</p>
+          </div>
+          <div class="row-between">
+            <h3 class="display" style="font-size:18px;">Strategy Notes</h3>
+            <button class="btn btn-primary btn-sm" onclick="openAddNoteModal()">+ Add Note</button>
+          </div>
+          <div class="chips">
+            ${cats.map(c => `<button class="chip ${ui.noteCat === c ? 'active' : ''}" onclick="ui.noteCat='${c}';renderMain();">${c}</button>`).join('')}
+          </div>
+          ${notes.map(n => `
+            <div class="card stack">
+              <div class="row-between">
+                <span class="badge ${n.pinned ? 'badge-gold' : 'badge-cyan'}">${n.pinned ? 'PINNED • ' : ''}${escapeHtml(n.category)}</span>
+                <div class="row" style="gap:6px;">
+                  <button class="btn btn-outline btn-sm" onclick="togglePinNote('${n.id}')">${n.pinned ? 'Unpin' : 'Pin'}</button>
+                  <button class="btn btn-outline btn-sm" style="color:var(--red);" onclick="deleteNote('${n.id}')">✕</button>
+                </div>
+              </div>
+              <strong>${escapeHtml(n.title)}</strong>
+              <p class="muted">${escapeHtml(n.content)}</p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function renderHelpCenter() {
+      const faqs = [
+        ['How do I copy Harshgamer113 sensitivity codes?', 'Open Home -> Loadouts and click Copy on any preset card to copy the share code directly.'],
+        ['How do custom Scrims & Match Logs work?', 'Go to Home -> Scrims to lock your squad slot or log match kills, rank, and damage.'],
+        ['How do I upload videos in the Videos tab?', 'Toggle Creator Admin in Videos, click + Upload, and upload via Cloudinary or paste a direct video URL.']
+      ];
+      return `
+        <div class="stack">
+          <button class="btn btn-outline btn-sm" style="align-self:flex-start;" onclick="ui.profileSub='main';renderMain();">← Back to Profile</button>
+          <h2 class="display" style="font-size:22px;">Help Center</h2>
+          <form class="card stack" onsubmit="submitQuestion(event)">
+            <strong>Ask Squad 113 Support</strong>
+            <textarea id="helpQ" class="textarea" rows="2" placeholder="Type your question..." required></textarea>
+            <button type="submit" class="btn btn-primary">Submit Question</button>
+          </form>
+          ${state.helpQuestions.map(q => `
+            <div class="card stack">
+              <span class="badge badge-lime" style="align-self:flex-start;">PENDING</span>
+              <strong>${escapeHtml(q.question)}</strong>
+            </div>
+          `).join('')}
+          ${faqs.map(([q, a]) => `
+            <div class="card stack">
+              <strong>${q}</strong>
+              <p class="muted">${a}</p>
+            </div>
+          `).join('')}
+          <a href="${YT_URL}" target="_blank" rel="noopener" class="btn btn-red btn-full">Visit @harshgamer-113 on YouTube</a>
+        </div>
+      `;
+    }
+
+    /* ---------------- ACTIONS & MODALS ---------------- */
+    function openModal(html) {
+      document.getElementById('modalBox').innerHTML = html;
+      document.getElementById('modalBackdrop').classList.add('open');
+    }
+    function closeModal() {
+      document.getElementById('modalBackdrop').classList.remove('open');
+    }
+    document.getElementById('modalBackdrop').onclick = (e) => {
+      if (e.target.id === 'modalBackdrop') closeModal();
+    };
+
+    window.toggleFav = (id) => {
+      const l = state.loadouts.find(x => x.id === id);
+      if (l) { l.fav = !l.fav; saveState(); renderMain(); }
+    };
+    window.deleteLoadout = (id) => {
+      state.loadouts = state.loadouts.filter(x => x.id !== id);
+      saveState(); renderMain(); showToast('Loadout removed');
+    };
+    window.openNewLoadoutModal = () => {
+      openModal(`
+        <h3 class="display">New Loadout</h3>
+        <form onsubmit="saveNewLoadout(event)" class="stack">
+          <input id="nlTitle" class="input" placeholder="Preset Title" required />
+          <select id="nlGame" class="select"><option>BGMI</option><option>Free Fire</option><option>CODM</option><option>Valorant</option></select>
+          <input id="nlCode" class="input mono" placeholder="Sensitivity Share Code" required />
+          <div class="grid-3">
+            <input id="nlCam" class="input" type="number" value="120" placeholder="Cam %" />
+            <input id="nlAds" class="input" type="number" value="105" placeholder="ADS %" />
+            <input id="nlGyro" class="input" type="number" value="335" placeholder="Gyro %" />
+          </div>
+          <input id="nlClaw" class="input" placeholder="Claw Style (e.g. 4-Finger Gyro)" value="4-Finger + Full Gyro" />
+          <textarea id="nlNotes" class="textarea" rows="2" placeholder="Recoil & scope notes..."></textarea>
+          <div class="row-between">
+            <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Preset</button>
+          </div>
+        </form>
+      `);
+    };
+    window.saveNewLoadout = (e) => {
+      e.preventDefault();
+      state.loadouts.unshift({
+        id: uid(),
+        title: document.getElementById('nlTitle').value.trim(),
+        game: document.getElementById('nlGame').value,
+        code: document.getElementById('nlCode').value.trim(),
+        cam: Number(document.getElementById('nlCam').value) || 100,
+        ads: Number(document.getElementById('nlAds').value) || 100,
+        gyro: Number(document.getElementById('nlGyro').value) || 0,
+        claw: document.getElementById('nlClaw').value.trim() || '4-Finger',
+        notes: document.getElementById('nlNotes').value.trim(),
+        fav: false
+      });
+      saveState(); closeModal(); renderMain(); showToast('Preset saved');
+    };
+
+    window.openJoinScrimModal = (id) => {
+      openModal(`
+        <h3 class="display">Join Scrim Lobby</h3>
+        <form onsubmit="joinScrim(event,'${id}')" class="stack">
+          <input id="jsIgn" class="input" placeholder="In-Game Name (IGN)" value="${escapeHtml(state.profile.gamerTag)}" required />
+          <input id="jsSquad" class="input" placeholder="Squad Name" value="Team 113" required />
+          <select id="jsRole" class="select"><option>Assaulter</option><option>IGL</option><option>Sniper</option><option>Support</option></select>
+          <div class="row-between">
+            <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button type="submit" class="btn btn-red">Lock Slot</button>
+          </div>
+        </form>
+      `);
+    };
+    window.joinScrim = (e, id) => {
+      e.preventDefault();
+      const s = state.scrims.find(x => x.id === id);
+      if (s && !s.registered) {
+        s.registered = true;
+        s.filledSlots = Math.min(s.maxSlots, s.filledSlots + 1);
+        s.ign = document.getElementById('jsIgn').value.trim();
+        s.squad = document.getElementById('jsSquad').value.trim();
+        s.role = document.getElementById('jsRole').value;
+        saveState();
+      }
+      closeModal(); renderMain(); showToast('Squad slot locked!');
+    };
+    window.leaveScrim = (id) => {
+      const s = state.scrims.find(x => x.id === id);
+      if (s && s.registered) {
+        s.registered = false;
+        s.filledSlots = Math.max(0, s.filledSlots - 1);
+        saveState(); renderMain(); showToast('Slot cancelled');
+      }
+    };
+
+    window.openMatchModal = () => {
+      openModal(`
+        <h3 class="display">Log Match Result</h3>
+        <form onsubmit="saveMatch(event)" class="stack">
+          <select id="mGame" class="select"><option>BGMI</option><option>Free Fire</option><option>CODM</option></select>
+          <input id="mMode" class="input" placeholder="Mode (e.g. Squad Classic)" value="Squad Classic" required />
+          <input id="mMap" class="input" placeholder="Map (e.g. Erangel)" value="Erangel" required />
+          <div class="grid-3">
+            <input id="mKills" class="input" type="number" value="8" placeholder="Kills" required />
+            <input id="mPlace" class="input" type="number" value="1" placeholder="Rank" required />
+            <input id="mDmg" class="input" type="number" value="1450" placeholder="Damage" required />
+          </div>
+          <input id="mNotes" class="input" placeholder="Match notes..." />
+          <div class="row-between">
+            <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Log</button>
+          </div>
+        </form>
+      `);
+    };
+    window.saveMatch = (e) => {
+      e.preventDefault();
+      state.matchLogs.unshift({
+        id: uid(),
+        game: document.getElementById('mGame').value,
+        mode: document.getElementById('mMode').value.trim(),
+        map: document.getElementById('mMap').value.trim(),
+        kills: Number(document.getElementById('mKills').value) || 0,
+        placement: Math.max(1, Number(document.getElementById('mPlace').value) || 1),
+        damage: Number(document.getElementById('mDmg').value) || 0,
+        notes: document.getElementById('mNotes').value.trim()
+      });
+      saveState(); closeModal(); ui.scrimSection = 1; renderMain(); showToast('Match logged!');
+    };
+    window.deleteMatch = (id) => {
+      state.matchLogs = state.matchLogs.filter(m => m.id !== id);
+      saveState(); renderMain(); showToast('Match deleted');
+    };
+
+    window.toggleSaveVideo = (id) => {
+      const v = state.videos.find(x => x.id === id);
+      if (v) { v.saved = !v.saved; saveState(); renderMain(); }
+    };
+    window.watchVideo = (id) => {
+      const v = state.videos.find(x => x.id === id);
+      if (v) {
+        v.views += 1;
+        saveState(); renderMain();
+        window.open(v.url || YT_URL, '_blank', 'noopener');
+      }
+    };
+    window.deleteVideo = (id) => {
+      state.videos = state.videos.filter(x => x.id !== id);
+      saveState(); renderMain(); showToast('Video deleted');
+    };
+    window.openUploadVideoModal = () => {
+      openModal(`
+        <h3 class="display">Upload Video</h3>
+        <form onsubmit="saveUploadedVideo(event)" class="stack">
+          <input id="uvTitle" class="input" placeholder="Video Title" required />
+          <select id="uvCat" class="select"><option>Montages</option><option>Sensitivity Guides</option><option>Live Streams</option></select>
+          <input id="uvUrl" class="input" placeholder="Direct Video / YouTube URL (optional if Cloudinary file chosen)" />
+          <input id="uvThumb" class="input" placeholder="Thumbnail Image URL (optional)" />
+          <div class="card-elevated stack" style="padding:10px;border-radius:10px;">
+            <span class="muted" style="font-size:12px;">Optional: Upload file (&le; 100MB) via Cloudinary</span>
+            <input id="uvCloud" class="input" placeholder="Cloudinary Cloud Name" />
+            <input id="uvPreset" class="input" value="hg_videos" placeholder="Upload Preset" />
+            <input id="uvFile" class="input" type="file" accept="video/*,image/*" />
+          </div>
+          <textarea id="uvDesc" class="textarea" rows="2" placeholder="Description..."></textarea>
+          <div class="row-between">
+            <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary" id="uvSubmit">Publish</button>
+          </div>
+        </form>
+      `);
+    };
+    window.saveUploadedVideo = async (e) => {
+      e.preventDefault();
+      let videoUrl = document.getElementById('uvUrl').value.trim();
+      let thumbUrl = document.getElementById('uvThumb').value.trim();
+      const file = document.getElementById('uvFile').files[0];
+      const cloud = document.getElementById('uvCloud').value.trim();
+      const preset = document.getElementById('uvPreset').value.trim() || 'hg_videos';
+      if (!file && !videoUrl) return showToast('Add a video file or a video URL');
+      if (file) {
+        if (file.size > 100 * 1024 * 1024) return showToast('Video must be under 100MB');
+        if (!cloud) return showToast('Enter your Cloudinary Cloud Name');
+        if (file.type.startsWith('image/') && !videoUrl) return showToast('Images are thumbnails only. Add a video file or URL too');
+        const btn = document.getElementById('uvSubmit');
+        btn.disabled = true; btn.textContent = 'Uploading...';
+        try {
+          const fd = new FormData();
+          fd.append('file', file);
+          fd.append('upload_preset', preset);
+          const kind = file.type.startsWith('video/') ? 'video' : 'image';
+          const res = await fetch(`https://api.cloudinary.com/v1_1/${encodeURIComponent(cloud)}/${kind}/upload`, { method: 'POST', body: fd });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error?.message || 'Upload failed');
+          if (kind === 'image') thumbUrl = data.secure_url;
+          else videoUrl = data.secure_url;
+        } catch (err) {
+          btn.disabled = false; btn.textContent = 'Publish';
+          return showToast(err.message);
+        }
+      }
+      if (!videoUrl) videoUrl = YT_URL;
+      state.videos.unshift({
+        id: uid(),
+        title: document.getElementById('uvTitle').value.trim(),
+        category: document.getElementById('uvCat').value,
+        duration: '--:--',
+        views: 1,
+        url: videoUrl,
+        thumb: thumbUrl,
+        desc: document.getElementById('uvDesc').value.trim(),
+        saved: false
+      });
+      saveState(); closeModal(); renderMain(); showToast('Video published!');
+    };
+
+    window.sendChat = (e) => {
+      e.preventDefault();
+      const inp = document.getElementById('chatInput');
+      const text = inp.value.trim();
+      if (!text || text.length > 1000) return;
+      state.chats.push({
+        id: uid(),
+        room: ui.chatRoom,
+        senderId: state.currentUser?.email || 'me',
+        senderName: state.currentUser?.name || state.profile.gamerTag,
+        role: 'SQUAD 113',
+        text,
+        me: true,
+        ts: Date.now()
+      });
+      saveState(); renderMain();
+      const box = document.getElementById('chatList');
+      if (box) box.scrollTop = box.scrollHeight;
+    };
+    window.reportMsg = (id) => {
+      state.reports.push({ id, ts: Date.now() });
+      saveState(); showToast('Report submitted for review');
+    };
+    window.copyLoadoutCode = (id) => {
+      const l = state.loadouts.find(x => x.id === id);
+      if (l) copyText(l.code, 'Sensitivity code copied');
+    };
+    window.copyAiLog = (id) => {
+      const log = state.aiLogs.find(x => x.id === id);
+      if (log) copyText(log.response, 'AI ideas copied');
+    };
+    window.blockUser = (id) => {
+      const msg = state.chats.find(c => c.senderId === id);
+      const name = msg ? msg.senderName : 'user';
+      if (!state.blockedUsers.some(b => b.id === id)) {
+        state.blockedUsers.push({ id, name });
+        saveState(); renderMain(); showToast('Blocked ' + name);
+      }
+    };
+    window.openBlockedModal = () => {
+      openModal(`
+        <h3 class="display">Blocked Users</h3>
+        <div class="stack">
+          ${state.blockedUsers.map(b => `
+            <div class="row-between">
+              <span>${escapeHtml(b.name)}</span>
+              <button class="btn btn-outline btn-sm" onclick="unblockUser('${b.id}')">Unblock</button>
+            </div>
+          `).join('')}
+        </div>
+        <button class="btn btn-primary" onclick="closeModal()">Done</button>
+      `);
+    };
+    window.unblockUser = (id) => {
+      state.blockedUsers = state.blockedUsers.filter(b => b.id !== id);
+      saveState(); closeModal(); renderMain(); showToast('User unblocked');
+    };
+
+    window.generateAi = () => {
+      const prompt = document.getElementById('aiPrompt').value.trim();
+      if (!prompt) return showToast('Enter a prompt first');
+      const templates = {
+        'Video Titles': `[Sample Mode]\nTopic: "${prompt}"\n1. "ZERO RECOIL 4-FINGER GYRO! New Season God-Mode Settings | Harshgamer113"\n2. "1v4 CLUTCH at Final Zone! Why Everyone Copies This Sensitivity"\n3. "I Tested Pro Custom Scrims at 120 FPS — Insane Comeback!"`,
+        'Training Drill': `[Sample Mode]\nFocus: "${prompt}"\n• Warmup (5 min): 40m spray transfer between 3 targets.\n• Close Range (8 min): Crouch-jiggle hipfire tracking + head height.\n• Match Ready (5 min): 1 TDM Warehouse match focusing on quick peeks.`,
+        'Thumbnail Hook': `[Sample Mode]\nConcept: "${prompt}"\n• Top Badge: "NEW CODE 2026"\n• Bold Text: "LASER AIM!"\n• Visual: Cyan rim light + Red-dot crosshair zoom on target.`,
+        'Drop Strategy': `[Sample Mode]\nPlan: "${prompt}"\n• Drop: Secure high-ground compound first & designate 1 scout.\n• Loadout: Primary AR (3x Gyro) + Close-range SMG/Shotgun.`
+      };
+      state.aiLogs.unshift({
+        id: uid(),
+        prompt,
+        category: ui.aiCat,
+        response: templates[ui.aiCat] || templates['Drop Strategy']
+      });
+      saveState(); renderMain();
+    };
+    window.deleteAiLog = (id) => {
+      state.aiLogs = state.aiLogs.filter(x => x.id !== id);
+      saveState(); renderMain();
+    };
+
+    window.openEditProfileModal = () => {
+      const p = state.profile;
+      openModal(`
+        <h3 class="display">Edit Player Profile</h3>
+        <form onsubmit="saveProfile(event)" class="stack">
+          <input id="epTag" class="input" value="${escapeHtml(p.gamerTag)}" placeholder="Gamer Tag" required />
+          <input id="epGame" class="input" value="${escapeHtml(p.mainGame)}" placeholder="Main Game" required />
+          <input id="epRole" class="input" value="${escapeHtml(p.role)}" placeholder="Role" required />
+          <input id="epDev" class="input" value="${escapeHtml(p.deviceName)}" placeholder="Device" required />
+          <input id="epKd" class="input" value="${escapeHtml(p.targetKd)}" placeholder="Target K/D" required />
+          <textarea id="epBio" class="textarea" rows="2">${escapeHtml(p.bio)}</textarea>
+          <div class="row-between">
+            <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      `);
+    };
+    window.saveProfile = (e) => {
+      e.preventDefault();
+      state.profile = {
+        gamerTag: document.getElementById('epTag').value.trim(),
+        mainGame: document.getElementById('epGame').value.trim(),
+        role: document.getElementById('epRole').value.trim(),
+        deviceName: document.getElementById('epDev').value.trim(),
+        targetKd: document.getElementById('epKd').value.trim(),
+        bio: document.getElementById('epBio').value.trim()
+      };
+      saveState(); closeModal(); renderMain(); showToast('Profile updated');
+    };
+
+    window.openAddNoteModal = () => {
+      openModal(`
+        <h3 class="display">Add Strategy Note</h3>
+        <form onsubmit="saveNote(event)" class="stack">
+          <input id="snTitle" class="input" placeholder="Note Title" required />
+          <select id="snCat" class="select"><option>Drop Spot</option><option>Recoil Tip</option><option>Goal</option></select>
+          <textarea id="snBody" class="textarea" rows="3" placeholder="Strategy details..." required></textarea>
+          <div class="row-between">
+            <button type="button" class="btn btn-outline" onclick="closeModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Note</button>
+          </div>
+        </form>
+      `);
+    };
+    window.saveNote = (e) => {
+      e.preventDefault();
+      state.squadNotes.unshift({
+        id: uid(),
+        title: document.getElementById('snTitle').value.trim(),
+        category: document.getElementById('snCat').value,
+        content: document.getElementById('snBody').value.trim(),
+        pinned: false
+      });
+      saveState(); closeModal(); renderMain(); showToast('Strategy note added');
+    };
+    window.togglePinNote = (id) => {
+      const n = state.squadNotes.find(x => x.id === id);
+      if (n) { n.pinned = !n.pinned; saveState(); renderMain(); }
+    };
+    window.deleteNote = (id) => {
+      state.squadNotes = state.squadNotes.filter(x => x.id !== id);
+      saveState(); renderMain(); showToast('Note deleted');
+    };
+
+    window.submitQuestion = (e) => {
+      e.preventDefault();
+      const q = document.getElementById('helpQ').value.trim();
+      if (!q) return;
+      state.helpQuestions.unshift({ id: uid(), question: q });
+      saveState(); renderMain(); showToast('Question submitted to Squad 113 Support');
+    };
+
+    window.logoutUser = () => {
+      state.currentUser = null;
+      ui.authMode = 'login';
+      saveState();
+      renderRoot();
+      showToast('Logged out');
+    };
+
+    /* ---------------- RENDER ---------------- */
+    function renderMain() {
+      const root = document.getElementById('mainContent');
+      if (ui.tab === 0) root.innerHTML = renderHome();
+      else if (ui.tab === 1) root.innerHTML = renderVideos();
+      else if (ui.tab === 2) root.innerHTML = renderChats();
+      else if (ui.tab === 3) root.innerHTML = renderAiStudio();
+      else root.innerHTML = renderProfile();
+    }
+
+    function renderRoot() {
+      const loggedIn = Boolean(state.currentUser);
+      authView.classList.toggle('hidden', loggedIn);
+      appShell.classList.toggle('hidden', !loggedIn);
+      if (!loggedIn) renderAuth();
+      else { renderNav(); renderMain(); }
+    }
+
+    (async function boot() {
+      try {
+        await migrateAccounts();
+      } catch (err) {
+        console.error('Account migration failed:', err);
+      }
+      renderRoot();
+    })();
+  </script>
+</body>
+</html>
